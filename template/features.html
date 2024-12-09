@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - ElevateHub</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .feature-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: #0056D2;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Platform Features</h1>
+        <p class="text-center text-muted mb-5">Explore the tools and features that make ElevateHub the ultimate platform for innovators.</p>
+
+        <div class="row">
+            <!-- Feature 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card feature-card text-center p-4">
+                    <div class="icon-circle">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <h5>Connect with Mentors</h5>
+                    <p class="text-muted">Find experienced mentors to guide you on your entrepreneurial journey.</p>
+                </div>
+            </div>
+            <!-- Feature 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card feature-card text-center p-4">
+                    <div class="icon-circle">
+                        <i class="bi bi-lightbulb"></i>
+                    </div>
+                    <h5>Share Your Ideas</h5>
+                    <p class="text-muted">Post your ideas and get feedback from a vibrant community.</p>
+                </div>
+            </div>
+            <!-- Feature 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card feature-card text-center p-4">
+                    <div class="icon-circle">
+                        <i class="bi bi-piggy-bank"></i>
+                    </div>
+                    <h5>Funding Opportunities</h5>
+                    <p class="text-muted">Access funding options to bring your innovative ideas to life.</p>
+                </div>
+            </div>
+            <!-- Feature 4 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card feature-card text-center p-4">
+                    <div class="icon-circle">
+                        <i class="bi bi-chat-dots"></i>
+                    </div>
+                    <h5>Collaborate with Peers</h5>
+                    <p class="text-muted">Work with other entrepreneurs to scale your vision.</p>
+                </div>
+            </div>
+            <!-- Feature 5 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card feature-card text-center p-4">
+                    <div class="icon-circle">
+                        <i class="bi bi-bar-chart"></i>
+                    </div>
+                    <h5>Track Your Growth</h5>
+                    <p class="text-muted">Monitor your progress and milestones within the platform.</p>
+                </div>
+            </div>
+            <!-- Feature 6 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card feature-card text-center p-4">
+                    <div class="icon-circle">
+                        <i class="bi bi-broadcast"></i>
+                    </div>
+                    <h5>Access Exclusive Resources</h5>
+                    <p class="text-muted">Gain insights and access premium content tailored for innovators.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

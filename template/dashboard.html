@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ElevateHub</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #0056D2;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #003E99;
+        }
+        .post-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .sidebar {
+            position: sticky;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Left Sidebar -->
+            <div class="col-lg-3 sidebar">
+                <div class="card text-center p-4">
+                    <img src="{{ profile.profile_picture.url|default:'path/to/default/image.jpg' }}" alt="Profile Picture" class="rounded-circle mb-3" style="width: 120px; height: 120px;">
+                    <h5>{{ profile.user.first_name }} {{ profile.user.last_name }}</h5>
+                    <p class="text-muted">{{ profile.role }}</p>
+                    <a href="{% url 'profile' %}" class="btn btn-outline-primary btn-sm">Edit Profile</a>
+                </div>
+                <div class="card mt-4 p-4">
+                    <h5>People You May Know</h5>
+                    {% for suggestion in suggestions %}
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="{{ suggestion.profile_picture.url|default:'path/to/default/image.jpg' }}" alt="Profile Picture" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                        <div>
+                            <h6>{{ suggestion.user.first_name }} {{ suggestion.user.last_name }}</h6>
+                            <p class="text-muted small">{{ suggestion.role }}</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Connect</a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="text-muted">No suggestions available.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-6">
+                <!-- Post an Idea -->
+<div class="post-card">
+    <h5>Post Your Idea</h5>
+    <form action="{% url 'post_idea' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="content" class="form-label">What's on your mind?</label>
+            <textarea id="content" class="form-control" name="content" rows="3" placeholder="Share your idea..." required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Attach an image (optional)</label>
+            <input id="image" type="file" name="image" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+</div>
+
+
+                <!-- Recent Posts -->
+                <div>
+                    <h4>Recent Posts</h4>
+                    {% for post in posts %}
+                    <div class="post-card">
+                        <h6><strong>{{ post.user.first_name }} {{ post.user.last_name }}</strong></h6>
+                        <p>{{ post.description|default:"No content available." }}</p>
+                        {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="Post Image by {{ post.user.first_name }}" class="img-fluid rounded mb-3">
+                        {% endif %}
+                        <p class="text-muted small">Posted on {{ post.timestamp|date:"F j, Y, g:i a" }}</p>
+                        <a href="{% url 'post_detail' post.id %}" class="btn btn-outline-primary btn-sm">View More</a>
+                    </div>
+                    {% empty %}
+                    <p class="text-center text-muted">No posts available. Be the first to share an idea!</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="col-lg-3 sidebar">
+                <div class="card p-4">
+                    <h5>Trending Tags</h5>
+                    {% for tag in trending_tags %}
+                    <span class="badge bg-primary me-1">#{{ tag }}</span>
+                    {% empty %}
+                    <p class="text-muted">No trending tags available at the moment.</p>
+                    {% endfor %}
+                </div>
+                <div class="card mt-4 p-4">
+                    <h5>Announcements</h5>
+                    <p class="text-muted">Stay tuned for the latest updates and events on ElevateHub!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

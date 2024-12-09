@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovators - ElevateHub</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .innovator-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            background-color: #ffffff;
+        }
+        .innovator-card:hover {
+            transform: translateY(-5px);
+        }
+        .profile-picture {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .badge-category {
+            background-color: #0056D2;
+            color: white;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Meet the Innovators</h1>
+        <p class="text-center text-muted mb-5">Discover amazing talents and their groundbreaking ideas.</p>
+
+        <!-- Innovator Cards -->
+        <div class="row">
+            {% for innovator in innovators %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card innovator-card p-3">
+                    <div class="d-flex align-items-center">
+{#                        <img src="{{ innovator.profile_picture.url|default:'path/to/default/image.jpg' }}"#}
+{#                             alt="Profile Picture"#}
+{#                             class="profile-picture me-3">#}
+                        <div>
+                            <h5 class="mb-0">{{ innovator.user.first_name }} {{ innovator.user.last_name }}</h5>
+                            <p class="text-muted small">{{ innovator.role }}</p>
+                        </div>
+                    </div>
+                    <p class="mt-3">{{ innovator.bio|truncatewords:20 }}</p>
+                  <div class="mt-2">
+    {% for tag in innovator.tag_list %}
+        <span class="badge badge-category">#{{ tag }}</span>
+    {% endfor %}
+</div>
+
+
+                    <a href="#" class="btn btn-outline-primary btn-sm w-100 mt-3">View Profile</a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center text-muted">No innovators to display at the moment.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
